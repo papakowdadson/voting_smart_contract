@@ -20,9 +20,11 @@ contract Voting {
         for (uint i = 0; i < candidates.length; i++) {
             if (keccak256(abi.encodePacked(candidates[i].name)) == keccak256(abi.encodePacked(_name))) {
                 // Value is in the array, revert the transaction
-                require("Value is already in the array");
+                revert("Value is already in the array");
             }
-            candidates.push(Candidate(_name, 0));
+            else{
+              candidates.push(Candidate(_name, 0));
+            }
         }
         
        

@@ -18,9 +18,9 @@ contract Voting {
     // Adds New Candidate
     function addCandidate(string memory _name) public {
         for (uint i = 0; i < candidates.length; i++) {
-            if (candidates[i].name == _name) {
+            if (keccak256(abi.encodePacked(candidates[i].name)) == keccak256(abi.encodePacked(_name))) {
                 // Value is in the array, revert the transaction
-                require(false, "Value is already in the array");
+                require(true, "Value is already in the array");
             }
             candidates.push(Candidate(_name, 0));
         }

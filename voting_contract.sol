@@ -13,11 +13,19 @@ contract Voting {
     mapping(address => bool) public voters;
 
     // Array to store candidates
-    Candidate[] public candidates;
+    Candidate[] private candidates;
 
     // Adds New Candidate
     function addCandidate(string memory _name) public {
-        candidates.push(Candidate(_name, 0));
+        for (uint i = 0; i < candidates.length; i++) {
+            if (candidates[i].name == _name) {
+                // Value is in the array, revert the transaction
+                require(false, "Value is already in the array");
+            }
+            candidates.push(Candidate(_name, 0));
+        }
+        
+       
     }
 
     // Removes Already Added Candidate
